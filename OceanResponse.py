@@ -1,26 +1,37 @@
-import os
-from dotenv import load_dotenv
-from langchain_groq import ChatGroq
 from langchain_core.messages import HumanMessage, AIMessage
-from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder 
+from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
+from langchain_ollama import OllamaLLM
 
-load_dotenv()
-groq_api_key = os.getenv('GROQ_API_KEY')
+
+phi35 = OllamaLLM(model="phi3.5:3.8b") 
 
 def response(question):
         memory = []
-        llm = ChatGroq(groq_api_key=groq_api_key, model_name="mixtral-8x7b-32768") 
         prompt_template = ChatPromptTemplate.from_messages(
             [
                 (
                     "system",
-                    "You are a ocean specialist.",
-                ),
+                    """You are a helpful assistant that recommends coordinates and locations in the ocean to support professionals such as marine researchers, ecologists, photographers, oceanographers, and submarine pilots.
+                        When a user asks about a specific marine animal, environment, or goal, respond with relevant information such as:
+                        - Which ocean or region it is found in.
+                        - Key example areas with latitude and longitude.
+                        - Any interesting notes, like biodiversity, common sightings, or known expeditions.
+
+                        Always format your response clearly and include multiple examples when available.
+                        Example:
+                        User: I want to search for sea turtles.
+                        Assistant: Sea turtles are commonly found in tropical and subtropical oceans. Some notable areas include:
+                        - Great Barrier Reef, Australia (Lat: -18.2871, Long: 147.6992)
+                        - Galápagos Islands (Lat: -0.9538, Long: -90.9656)
+                        - Florida Keys, USA (Lat: 24.5551, Long: -81.7800)
+                        """,
+
+                    ),
                     MessagesPlaceholder(variable_name="memory"),
                     ("human", "{input}"),
-            ]
-        )
-        chain = prompt_template | llm
+                    ]
+                    )
+        chain = prompt_template | phi35
 
         response = chain.invoke({"input": question, "memory":memory})
 
