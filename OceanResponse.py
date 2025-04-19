@@ -3,7 +3,7 @@ from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_ollama import OllamaLLM
 
 
-phi35 = OllamaLLM(model="phi3.5:3.8b") 
+phi35 = OllamaLLM(model="mistral:7b") 
 
 def response(question):
         memory = []
@@ -28,9 +28,9 @@ def response(question):
 
                     ),
                     MessagesPlaceholder(variable_name="memory"),
-                    ("human", "{input}"),
-                    ]
-                    )
+                    ("human", "{input}")
+                                            ]
+                                                )
         chain = prompt_template | phi35
 
         response = chain.invoke({"input": question, "memory":memory})
