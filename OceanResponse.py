@@ -18,13 +18,6 @@ def response(question):
 
     Always format your response clearly and include multiple examples when available.
 
-    Example:
-    User: I want to search for sea turtles.
-    Assistant: Sea turtles are commonly found in tropical and subtropical oceans. Some notable areas include:
-    - Great Barrier Reef, Australia (Lat: -18.2871, Long: 147.6992)
-    - Galápagos Islands (Lat: -0.9538, Long: -90.9656)
-    - Florida Keys, USA (Lat: 24.5551, Long: -81.7800)
-
     Now, respond to the following question:
 
     User: {question}
