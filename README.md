@@ -63,3 +63,6 @@ A web-based chatbot that provides information about ocean locations, marine life
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
+
+<img width="1870" height="927" alt="image" src="https://github.com/user-attachments/assets/8f971b0f-9833-4a52-873c-fe2f43140616" />
+
